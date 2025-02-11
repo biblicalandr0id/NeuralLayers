@@ -6,8 +6,10 @@ import numpy as np
 from datetime import datetime
 import math
 
-class NeurologicalNetwork(nn.Module):
+class UnifiedBrainLogicNetwork(nn.Module):
     def __init__(self, 
+                 timestamp: str = "2025-02-10 01:37:46",
+                 user: str = "biblicalandr0id",
                  input_dim: int = 1024,
                  hidden_dim: int = 2048,
                  output_dim: int = 512):
@@ -131,7 +133,7 @@ class LogicalProcessor(nn.Module):
     def compute_truth_valuation(self, x: torch.Tensor) -> torch.Tensor:
         return self.truth_valuation(x)
 
-class NeuralLogicalIntegrator(nn.Module):
+class NeuralogicalIntegrator(nn.Module):
     """Implements the neural-logical integration operator ⊛"""
     def __init__(self, hidden_dim: int):
         super().__init__()

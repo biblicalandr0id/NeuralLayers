@@ -3,7 +3,7 @@ import torch.nn as nn
 import numpy as np
 
 """
-II. Neural-Logical Network Dynamics (NLND):
+II. Neural Logical Network Dynamics (NLND):
 ∂V(x,y,z,t)/∂t = D∇²V - ∑[j=1→m] gⱼ(t)[V - Eⱼ] + ∑[k=1→p] Iₖ(t)
 Coupled with:
 Γ = {
@@ -14,12 +14,9 @@ Coupled with:
 """
 
 
-class NLND(nn.Module):
+class NeurologicDynamics(nn.Module):
     def __init__(self, spatial_dims=(32,32,32), num_channels=5, dt=0.01):
         super().__init__()
-        self.creation_utc = "2025-02-10 13:23:54"
-        self.creator = "biblicalandr0id"
-        
         # Spatial dimensions for V(x,y,z,t)
         self.dx, self.dy, self.dz = spatial_dims
         self.dt = dt

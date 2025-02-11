@@ -1,9 +1,10 @@
-Unified Process Υ(t₀ = 2025-02-10 01:34:00, u = biblicalandr0id) = 
-
+nnp_equation.md
+Neurological Network Process 
 ℬ(t) ⊗ ℒ(t) = ∮(t₀→t){∭[Ω₁,Ω₂,Ω₃] ∑[i=1→n](ρᵢ(t) × ∇²Φᵢ(x,y,z,t))} dt ⊗ ∫(Ψ ∘ Γ) dω
 
 Where:
 
+cip_equation.md
 I. Combined Input Processing (CIP):
 CIP(t) = {
     Sensory: Σ(t) = ∑[s∈S] ∫[0→t] λₛ(τ) × [∏(i=1→5) ψᵢ(s,τ)] dτ
@@ -16,7 +17,9 @@ CIP(t) = {
     i ∈ {1...n} premises
 }
 
-II. Neural-Logical Network Dynamics (NLND):
+
+nnd_equation.md
+II. NeuroLogical Network Dynamics (NND):
 ∂V(x,y,z,t)/∂t = D∇²V - ∑[j=1→m] gⱼ(t)[V - Eⱼ] + ∑[k=1→p] Iₖ(t)
 Coupled with:
 Γ = {
@@ -25,35 +28,52 @@ Coupled with:
     ω = √(α² + β² + γ²)            // Reasoning momentum
 }
 
-III. Unified Processing Functions (UPF):
 
-1. Cerebrum-Logic Integration:
+
+
+
+
+cli_equation.md
+Cerebrum-Logic Integration:
    UPF_cerebrum = ∑[r∈R] ∫[V₁→V₆] σ(∇²Φᵣ × W_cortical) dV ⊗ (Ψ ∘ Γ)
 
-2. Rational-Cerebellar Processing:
+
+rcp_equation.md
+Rational-Cerebellar Processing:
    UPF_cerebellum = (∮[S] (∇ × B_purkinje) · dS + ∑[i=1→4] DCN_i(t)) ⊕ ω
 
-3. Logical-Brainstem Interface:
+
+lbi_equation.md
+Logical-Brainstem Interface:
    UPF_brainstem = ∫[z₁→z₂] ∑[n=1→12] CN_n(z,t) × RF(z,t) dz ⊗ τ(p)
 
-IV. Combined Constraints (CC):
 
-1. Physical Constraints:
+
+
+pc_equation.md
+   Physical Constraints:
    - Conservation of Neural Energy: ∂ρ/∂t + ∇·J = 0
    - Membrane Potential: -70mV ≤ V(x,y,z,t) ≤ +40mV
    - ATP Threshold: ATP(t) > ATP_critical
 
-2. Logical Constraints:
+
+lc_equation.md
+   Logical Constraints:
    - Conservation of Truth: ∮ τ(p) dp = 1
    - Logical Consistency: ∀x,y ∈ P: x ⊕ y ≠ (x ⊗ ¬y)
    - Cognitive Boundary: ||Ψ|| ≤ K where K is rationality constant
 
+
+unified_operators.md
 V. Unified Operators (UO):
 ∘ = cognitive convolution
 ⊕ = logical tensor product
 ⊗ = rational cross-mapping
 ⊛ = neural-logical integration operator (newly defined)
 
+
+
+cssv_equation.md
 VI. Combined System State Vector:
 Φ(t) = [
     V(t),                    // Membrane potential
@@ -66,15 +86,22 @@ VI. Combined System State Vector:
     ω(t)                     // Reasoning momentum
 ]ᵀ
 
+
+
+tecs_equation.md
 VII. Temporal Evolution of Combined System:
 ∂Φ/∂t = (ℋ ⊛ ℒ)Φ
 Where:
 ℋ = System Hamiltonian
 ℒ = Logical operator
 
+
+gof_equation.md
 VIII. Global Output Function:
 Θ(t) = ℱ{Ω_m(t), Ω_c(t), Ω_a(t)} × exp(-|t - t₀|/τ) ⊗ ∫(Ψ ∘ Γ) dω
 
+
+ubc_equation.md
 IX. Unified Boundary Conditions:
 1. lim[x→∂Ω] V(x,t) = V_rest
 2. lim[t→∞] ∫[V] |∇Φ|² dV < ∞

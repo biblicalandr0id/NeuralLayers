@@ -6,8 +6,10 @@ import numpy as np
 from datetime import datetime
 import math
 
-class NeurologicalNetwork(nn.Module):
+class NeurologicNetwork(nn.Module):
     def __init__(self, 
+                 timestamp: str = "2025-02-10 01:37:46",
+                 user: str = "biblicalandr0id",
                  input_dim: int = 1024,
                  hidden_dim: int = 2048,
                  output_dim: int = 512):
@@ -207,7 +209,7 @@ class UnifiedOutput(nn.Module):
 
 # Example Usage
 if __name__ == "__main__":
-    model = UnifiedBrainLogicNetwork()
+    model = NeurologicNetwork()
     
     # Example input
     batch_size = 32
