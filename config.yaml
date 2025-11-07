@@ -1,0 +1,127 @@
+# NeuralLayers Configuration File
+
+# Model Architecture
+model:
+  name: "UnifiedBrainLogicNetwork"
+  input_dim: 1024
+  hidden_dim: 2048
+  output_dim: 512
+
+# Brain Network Parameters
+brain:
+  # Membrane Potential
+  V_rest: -70.0  # mV
+  V_peak: 40.0   # mV
+  V_threshold: -55.0  # mV
+  tau_membrane: 20.0  # ms
+
+  # Calcium Dynamics
+  Ca_baseline: 100.0  # nM
+  Ca_max: 1000.0      # nM
+  tau_calcium: 50.0   # ms
+
+  # Energy (ATP)
+  ATP_min: 1000.0      # μM
+  ATP_baseline: 5000.0  # μM
+  ATP_max: 10000.0      # μM
+
+  # Neurotransmitter
+  NT_baseline: 1.0  # μM
+  NT_max: 10.0      # μM
+  tau_NT: 100.0     # ms
+
+# Logical Reasoning Parameters
+logical:
+  num_premises: 3
+  use_fibonacci_weights: true
+  golden_ratio_sigma: true  # Use φ as sigma in Phi activation
+  logic_weights:
+    truth: 1.0
+    contradiction: -1.0
+    uncertainty: 0.5
+
+# Consciousness Parameters
+consciousness:
+  num_layers: 7
+  dimensions: [7, 7, 7]
+  use_golden_ratio_decay: true
+  enable_fft_creative: true  # FFT in layer 5
+  complex_state: true
+
+# UMI (Monitoring) Parameters
+umi:
+  alpha: 0.4  # Weight for deviation
+  beta: 0.3   # Weight for trend
+  gamma: 0.2  # Weight for variation
+  delta: 0.1  # Weight for anomaly
+  critical_threshold: 1.0
+  warning_threshold: 0.7
+  learnable_weights: false
+
+# Training Parameters
+training:
+  batch_size: 32
+  learning_rate: 0.001
+  num_epochs: 100
+  optimizer: "adam"
+  loss_function: "mse"
+  gradient_clip_value: 1.0
+  use_mixed_precision: false
+
+# Device Configuration
+device:
+  use_cuda: true
+  cuda_device: 0
+  num_workers: 4
+  pin_memory: true
+
+# Logging Configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  log_to_file: true
+  log_file: "neurallayers.log"
+  log_to_tensorboard: false
+  tensorboard_dir: "./runs"
+  log_interval: 100  # Log every N steps
+
+# Checkpointing
+checkpointing:
+  enabled: true
+  save_dir: "./checkpoints"
+  save_interval: 1000  # Save every N steps
+  keep_last_n: 5  # Keep only last N checkpoints
+
+# Visualization
+visualization:
+  enabled: true
+  plot_interval: 500
+  save_plots: true
+  plot_dir: "./plots"
+  plot_formats: ["png", "pdf"]
+
+# Constraints
+constraints:
+  enforce_physical: true
+  enforce_logical: true
+  rationality_constant: 1.0
+
+# Numerical Stability
+numerical:
+  epsilon: 1.0e-8
+  use_gradient_clipping: true
+  gradient_clip_norm: 1.0
+  use_batch_norm: true
+  use_layer_norm: true
+
+# Experimental Features
+experimental:
+  enable_attention_visualization: false
+  enable_state_tracking: true
+  enable_dynamic_routing: false
+  use_adaptive_learning_rate: false
+
+# Miscellaneous
+misc:
+  seed: 42
+  deterministic: false
+  benchmark: true  # cudnn.benchmark for faster training
