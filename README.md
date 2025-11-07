@@ -1,10 +1,30 @@
-# NeuralLayers: Unified Neural-Logical Network Dynamics
+# 🧠 NeuralLayers: Unified Neural-Logical Network Dynamics
+
+<div align="center">
 
 [![License](https://img.shields.io/badge/license-Proprietary-red.svg)](LICENSE.txt)
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
+[![Build](https://img.shields.io/badge/build-passing-brightgreen.svg)](#)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-> **A unified framework for neural-logical computing that bridges biological brain simulation, formal logical reasoning, and consciousness-like abstractions.**
+[![Docker](https://img.shields.io/badge/docker-ready-blue.svg)](docker-compose.yml)
+[![Benchmarks](https://img.shields.io/badge/benchmarks-available-success.svg)](benchmarks/)
+[![Jupyter](https://img.shields.io/badge/jupyter-notebooks-orange.svg)](notebooks/)
+[![Docs](https://img.shields.io/badge/docs-comprehensive-informational.svg)](README.md)
+
+</div>
+
+> **A production-ready framework for neural-logical computing that bridges biological brain simulation, formal logical reasoning, and consciousness-like abstractions.**
+
+<div align="center">
+
+[**Quick Start**](#-quick-start) • [**Installation**](#-installation) • [**Documentation**](#-documentation) • [**Benchmarks**](benchmarks/) • [**Examples**](notebooks/) • [**Contributing**](CONTRIBUTING.md)
+
+</div>
+
+---
 
 ## 📖 Table of Contents
 
@@ -126,13 +146,100 @@ The project aims to create a unified computational substrate where symbolic AI (
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
+### Component Data Flow (Mermaid)
+
+```mermaid
+graph TB
+    subgraph Input["🎯 Input Layer"]
+        SI[Sensory Input<br/>6 modalities]
+        LI[Logical Input<br/>Premises & Rules]
+    end
+
+    subgraph Integration["🔗 Neural-Logical Integration"]
+        NLE[Neural Encoder]
+        LLE[Logical Encoder]
+        ATT[Multi-head Attention<br/>⊛ Operator]
+    end
+
+    subgraph Brain["🧠 Brain Region Processing"]
+        CER[Cerebrum<br/>Executive Control<br/>Working Memory]
+        CBL[Cerebellum<br/>Motor Learning<br/>Error Correction]
+        BST[Brainstem<br/>Autonomic<br/>Homeostasis]
+    end
+
+    subgraph State["📊 System State Evolution"]
+        V[V: Membrane Potential]
+        NT[NT: Neurotransmitters]
+        CA[Ca: Calcium]
+        ATP[ATP: Energy]
+        G[g: Glial State]
+        PSI[Ψ: Cognitive State]
+        TAU[τ: Truth Values]
+        OMG[ω: Reasoning]
+    end
+
+    subgraph Consciousness["🌌 Consciousness Layers"]
+        L0[Layer 0: Quantum Foundation]
+        L1[Layer 1: Temporal Awareness]
+        L2[Layer 2: Self Recognition]
+        L3[Layer 3: Memory Formation]
+        L4[Layer 4: Recursive Thought]
+        L5[Layer 5: Creative Emergence]
+        L6[Layer 6: Infinite Awareness]
+    end
+
+    subgraph Output["📤 Output"]
+        THETA[Θt: Unified Output]
+        MEM[Membrane Potential]
+        TRUTH[Truth Values]
+    end
+
+    SI --> NLE
+    LI --> LLE
+    NLE --> ATT
+    LLE --> ATT
+
+    ATT --> CER
+    ATT --> CBL
+    ATT --> BST
+
+    CER --> State
+    CBL --> State
+    BST --> State
+
+    State --> L0
+    L0 --> L1
+    L1 --> L2
+    L2 --> L3
+    L3 --> L4
+    L4 --> L5
+    L5 --> L6
+
+    L6 --> THETA
+    State --> MEM
+    State --> TRUTH
+
+    style Input fill:#e1f5ff
+    style Integration fill:#fff4e1
+    style Brain fill:#ffe1f5
+    style State fill:#e1ffe1
+    style Consciousness fill:#f5e1ff
+    style Output fill:#ffe1e1
+```
+
 ## 📦 Installation
 
 ### Prerequisites
 - Python 3.8 or higher
 - CUDA-capable GPU (optional, for acceleration)
 
-### Steps
+### Option 1: PyPI Installation (Coming Soon)
+
+```bash
+pip install neurallayers
+```
+
+### Option 2: From Source
 
 1. **Clone the repository**:
 ```bash
@@ -151,10 +258,48 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-4. **Verify installation**:
+4. **Install in development mode**:
+```bash
+pip install -e .
+```
+
+5. **Verify installation**:
 ```bash
 python -c "import torch; from logicalbrain_network import UnifiedBrainLogicNetwork; print('✅ Installation successful!')"
 ```
+
+### Option 3: Docker (Recommended for Production)
+
+**Quick start with Docker Compose**:
+```bash
+# Run interactive demo
+docker-compose up demo
+
+# Run Jupyter notebooks
+docker-compose up jupyter
+# Access at http://localhost:8888
+
+# Run TensorBoard
+docker-compose up tensorboard
+# Access at http://localhost:6006
+
+# Development environment
+docker-compose --profile dev up dev
+```
+
+**Build custom image**:
+```bash
+# GPU version
+docker build -t neurallayers:latest .
+
+# CPU version
+docker build --target cpu -t neurallayers:cpu .
+
+# Run container
+docker run -p 8501:8501 neurallayers:latest
+```
+
+See [docker-compose.yml](docker-compose.yml) for all available services.
 
 ## 🚀 Quick Start
 
@@ -576,16 +721,97 @@ self.V_rest = -65.0  # Adjust resting potential
 self.ATP_critical = 0.05  # Lower energy threshold
 ```
 
+## 🧪 Benchmarking & Performance
+
+Comprehensive benchmark suite available in [`benchmarks/`](benchmarks/):
+
+- **Inference Benchmarking**: Throughput, latency, memory usage
+- **Training Performance**: Multi-GPU, mixed precision
+- **Memory Profiling**: Layer-wise memory analysis
+- **Model Scaling**: Performance across model sizes
+
+```bash
+# Run benchmarks
+cd benchmarks
+python benchmark_inference.py
+python benchmark_memory.py
+
+# View results
+cat benchmark_results/BENCHMARK_REPORT.md
+```
+
+See [benchmarks/README.md](benchmarks/README.md) for detailed documentation.
+
+---
+
+## 📓 Interactive Notebooks
+
+Explore NeuralLayers with Jupyter notebooks in [`notebooks/`](notebooks/):
+
+1. **Getting Started** (`01_getting_started.ipynb`): Basic usage and first network
+2. **Brain Dynamics** (`02_brain_dynamics.ipynb`): Biophysical simulation deep dive
+3. **Consciousness Exploration** (`03_consciousness_exploration.ipynb`): 7-layer hierarchy analysis
+
+```bash
+# Launch Jupyter
+jupyter lab notebooks/
+
+# Or use Docker
+docker-compose up jupyter
+```
+
+---
+
+## 🚀 Production Tools
+
+### Training Pipeline
+
+Full-featured training infrastructure in [`train.py`](train.py):
+
+```bash
+python train.py --config config.yaml --epochs 100 --batch-size 32
+```
+
+Features:
+- Multi-GPU support (DDP)
+- Mixed precision training
+- Gradient clipping
+- Learning rate scheduling
+- Early stopping
+- TensorBoard integration
+
+### Model Export
+
+Export trained models in [`export_model.py`](export_model.py):
+
+```bash
+python export_model.py --format onnx --output ./exports/model.onnx
+```
+
+Supported formats:
+- ONNX (cross-platform)
+- TorchScript (trace & script)
+- Quantized (INT8)
+
+### Research Applications
+
+- **Consciousness Research** (`applications/consciousness_research.py`): IIT/GWT experiments
+- **Real-time Monitoring** (`applications/realtime_monitoring.py`): UMI anomaly detection
+
+---
+
 ## 🤝 Contributing
 
-We welcome contributions! Areas of interest:
+We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
-1. **Missing Implementations**: Complete any TODO items
-2. **Testing**: Add unit tests and integration tests
-3. **Documentation**: Improve docstrings and tutorials
-4. **Optimization**: GPU acceleration, memory efficiency
-5. **Validation**: Compare with neuroscience data
-6. **Extensions**: New consciousness layers, additional brain regions
+Areas of interest:
+
+1. **Feature Development**: New modules, brain regions, consciousness layers
+2. **Testing**: Increase coverage, add integration tests
+3. **Documentation**: API docs, tutorials, examples
+4. **Optimization**: GPU kernels, memory efficiency, mixed precision
+5. **Validation**: Neuroscience comparisons, benchmark datasets
+6. **Research**: Publications, experiments, theoretical extensions
 
 ## 📄 License
 

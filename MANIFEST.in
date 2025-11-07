@@ -1,0 +1,58 @@
+# Include documentation and configuration files
+include README.md
+include LICENSE.txt
+include CHANGELOG.md
+include CONTRIBUTING.md
+include QUICKSTART.md
+include RECOMMENDATIONS.md
+include config.yaml
+include requirements.txt
+
+# Include all Python source files
+recursive-include . *.py
+
+# Include Jupyter notebooks
+recursive-include notebooks *.ipynb
+
+# Include test files
+recursive-include tests *.py
+
+# Include benchmark scripts
+recursive-include benchmarks *.py
+recursive-include benchmarks *.md
+
+# Include application examples
+recursive-include applications *.py
+
+# Include configuration files
+include .pre-commit-config.yaml
+include docker-compose.yml
+include Dockerfile
+include .dockerignore
+
+# Exclude build artifacts
+global-exclude __pycache__
+global-exclude *.py[cod]
+global-exclude *$py.class
+global-exclude *.so
+global-exclude .DS_Store
+global-exclude *.egg-info
+global-exclude .git*
+
+# Exclude data and checkpoints
+exclude data/*
+exclude checkpoints/*
+exclude logs/*
+exclude exports/*
+exclude benchmark_results/*
+
+# Exclude IDE files
+exclude .vscode/*
+exclude .idea/*
+exclude *.swp
+exclude *.swo
+
+# Exclude temporary files
+exclude *.log
+exclude *.tmp
+exclude *.bak
