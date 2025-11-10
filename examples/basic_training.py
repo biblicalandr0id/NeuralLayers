@@ -4,14 +4,17 @@ Basic Training Example
 Demonstrates how to train a NeuralLayers model on a simple task.
 """
 
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
 import matplotlib.pyplot as plt
-from pathlib import Path
 
-from logicalbrain_network import UnifiedBrainNetwork
+from logicalbrain_network import UnifiedBrainLogicNetwork
 
 
 def generate_synthetic_data(num_samples=1000, input_dim=128, output_dim=64):
@@ -114,10 +117,10 @@ def main():
 
     # Initialize model
     print(f"{'Initializing model':<40}", end="")
-    model = UnifiedBrainNetwork(
+    model = UnifiedBrainLogicNetwork(
         input_dim=input_dim,
         hidden_dim=hidden_dim,
-        num_layers=4
+        output_dim=output_dim
     ).to(device)
 
     total_params = sum(p.numel() for p in model.parameters())

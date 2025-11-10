@@ -4,8 +4,12 @@ Simple Network Example
 Demonstrates basic usage of NeuralLayers framework with minimal setup.
 """
 
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 import torch
-from logicalbrain_network import UnifiedBrainNetwork
+from logicalbrain_network import UnifiedBrainLogicNetwork
 
 
 def main():
@@ -27,10 +31,10 @@ def main():
 
     # Initialize model
     print(f"\n{'Step 1: Initializing model':<40}", end="")
-    model = UnifiedBrainNetwork(
+    model = UnifiedBrainLogicNetwork(
         input_dim=input_dim,
         hidden_dim=hidden_dim,
-        num_layers=4
+        output_dim=input_dim
     )
 
     # Count parameters
