@@ -133,7 +133,7 @@ class BrainNetwork(nn.Module):
         cerebellum = torch.tanh(self.cerebellum_layer(higher)) * (NT / self.NT_0)
         
         # 6. Sequential Processing
-        memory = self.memory_layer(higher) * torch.exp(-self.dt/self.tau)
+        memory = self.memory_layer(higher) * torch.exp(torch.tensor(-self.dt/self.tau))
         executive = self.executive_layer(memory) * (1 - torch.exp(-ATP/self.ATP_min))
         
         # 7. Output Generation

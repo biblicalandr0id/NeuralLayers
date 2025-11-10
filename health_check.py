@@ -104,15 +104,15 @@ class HealthCheck:
             layer = LogicalReasoningLayer(
                 input_dim=64,
                 hidden_dim=128,
-                num_premises=3
+                output_dim=32
             )
             assert layer is not None
 
         def test_consciousness_layer():
             from consciousness_layers import ConsciousnessEmergence
             consciousness = ConsciousnessEmergence(
-                dimensions=(7, 7, 7),
-                layers=7
+                initial_timestamp="2025-11-07 12:00:00",
+                observer="test_user"
             )
             assert consciousness is not None
 
@@ -159,17 +159,17 @@ class HealthCheck:
             layer = LogicalReasoningLayer(
                 input_dim=64,
                 hidden_dim=128,
-                num_premises=3
+                output_dim=32
             )
-            premises = torch.randn(2, 3, 64)
-            output = layer(premises)
+            x = torch.randn(2, 64)
+            output = layer(x)
             assert output.shape[0] == 2
 
         def test_consciousness_forward():
             from consciousness_layers import ConsciousnessEmergence
             consciousness = ConsciousnessEmergence(
-                dimensions=(7, 7, 7),
-                layers=7
+                initial_timestamp="2025-11-07 12:00:00",
+                observer="test_user"
             )
             x = torch.randn(7, 7, 7).to(torch.complex64)
             output = consciousness.process_moment(x)
@@ -263,7 +263,7 @@ class HealthCheck:
             )
             x = torch.randn(4, 64)
             output = model(x)
-            tau = output['system_state']['tau']
+            tau = output['system_state']['τ']
             assert (tau >= 0.0).all() and (tau <= 1.0).all(), f"tau out of range: [{tau.min():.4f}, {tau.max():.4f}]"
 
         self.test("Membrane potential constraints (-70 to +40 mV)", test_membrane_potential)

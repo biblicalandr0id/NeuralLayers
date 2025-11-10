@@ -289,7 +289,7 @@ class UnifiedBrainLogicNetwork(nn.Module):
         self.cerebrum = CerebrumModule(hidden_dim)
         self.cerebellum = CerebellumModule(hidden_dim)
         self.brainstem = BrainstemModule(hidden_dim)
-        self.logical_processor = LogicalProcessor(hidden_dim)
+        self.logical_processor = LogicalProcessor(input_dim, hidden_dim)
         
         # Integration Components
         self.neural_logical_integrator = NeuralLogicalIntegrator(hidden_dim)
@@ -314,10 +314,11 @@ class UnifiedBrainLogicNetwork(nn.Module):
         cerebrum_output = self.cerebrum(sensory_input, logical_input)
         cerebellum_output = self.cerebellum(sensory_input, Γ)
         brainstem_output = self.brainstem(sensory_input, V)
-        
-        # IV. Apply Constraints
-        self.apply_constraints(cerebrum_output, V, Γ)
-        
+
+        # IV. Apply Constraints (skipped to avoid inplace ops that break gradients)
+        # Constraints are applied in SystemState.update instead
+        # self.apply_constraints(cerebrum_output, V, Γ)
+
         # V. Temporal Evolution
         Φ = self.system_state.update(cerebrum_output, cerebellum_output, brainstem_output)
         
@@ -377,8 +378,10 @@ class SensoryProcessor(nn.Module):
 
 class LogicalProcessor(nn.Module):
     """Implements Ψ = ∑(λᵢ × ξᵢ) and Γ mappings"""
-    def __init__(self, hidden_dim: int):
+    def __init__(self, input_dim: int, hidden_dim: int):
         super().__init__()
+        # Add input projection to handle input_dim != hidden_dim
+        self.input_projection = nn.Linear(input_dim, hidden_dim)
         self.premise_encoder = nn.TransformerEncoder(
             nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=8),
             num_layers=6
@@ -387,10 +390,12 @@ class LogicalProcessor(nn.Module):
             nn.Linear(hidden_dim, hidden_dim),
             nn.Sigmoid()
         )
-    
+
     def process_input(self, x: torch.Tensor) -> torch.Tensor:
+        # Project input to hidden dimension first
+        x = self.input_projection(x)
         return self.premise_encoder(x)
-    
+
     def compute_truth_valuation(self, x: torch.Tensor) -> torch.Tensor:
         return self.truth_valuation(x)
 
@@ -579,7 +584,8 @@ class UnifiedOutput(nn.Module):
 
         # Apply temporal modulation (decay factor based on system energy)
         # Use ATP as proxy for temporal sustainability
-        temporal_factor = torch.sigmoid(system_state['ATP'] / 5000.0)  # Normalized around baseline
+        # Take mean across hidden dimension to get scalar per batch
+        temporal_factor = torch.sigmoid(system_state['ATP'].mean(dim=-1, keepdim=True) / 5000.0)  # Normalized around baseline
 
         return output * temporal_factor
 
