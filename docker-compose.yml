@@ -1,0 +1,126 @@
+version: '3.8'
+
+services:
+  # Streamlit demo application
+  demo:
+    build:
+      context: .
+      target: base
+    image: neurallayers:latest
+    container_name: neurallayers-demo
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/workspace/data
+      - ./checkpoints:/workspace/checkpoints
+      - ./logs:/workspace/logs
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+    command: python demo_app.py --mode streamlit
+    restart: unless-stopped
+
+  # Jupyter Lab for interactive development
+  jupyter:
+    build:
+      context: .
+      target: dev
+    image: neurallayers:dev
+    container_name: neurallayers-jupyter
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/workspace
+      - ./data:/workspace/data
+      - ./checkpoints:/workspace/checkpoints
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - CUDA_VISIBLE_DEVICES=0
+    command: jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''
+    restart: unless-stopped
+
+  # TensorBoard for training visualization
+  tensorboard:
+    build:
+      context: .
+      target: base
+    image: neurallayers:latest
+    container_name: neurallayers-tensorboard
+    ports:
+      - "6006:6006"
+    volumes:
+      - ./logs:/workspace/logs
+    command: tensorboard --logdir=/workspace/logs --host=0.0.0.0
+    restart: unless-stopped
+
+  # Training service (GPU required)
+  train:
+    build:
+      context: .
+      target: base
+    image: neurallayers:latest
+    container_name: neurallayers-train
+    volumes:
+      - ./data:/workspace/data
+      - ./checkpoints:/workspace/checkpoints
+      - ./logs:/workspace/logs
+      - ./config.yaml:/workspace/config.yaml
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    command: python train.py --config config.yaml --epochs 100
+    profiles:
+      - training
+
+  # CPU-only demo (no GPU required)
+  demo-cpu:
+    build:
+      context: .
+      target: cpu
+    image: neurallayers:cpu
+    container_name: neurallayers-demo-cpu
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/workspace/data
+      - ./checkpoints:/workspace/checkpoints
+    command: python demo_app.py --mode streamlit
+    profiles:
+      - cpu
+
+  # Development environment
+  dev:
+    build:
+      context: .
+      target: dev
+    image: neurallayers:dev
+    container_name: neurallayers-dev
+    ports:
+      - "8888:8888"
+      - "8501:8501"
+      - "6006:6006"
+    volumes:
+      - .:/workspace
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+    profiles:
+      - dev
+
+# Shared network
+networks:
+  default:
+    name: neurallayers-network
+
+# Persistent volumes
+volumes:
+  data:
+  checkpoints:
+  logs:

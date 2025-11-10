@@ -1,0 +1,121 @@
+# Auto detect text files and normalize line endings to LF
+* text=auto eol=lf
+
+# Source code
+*.py text eol=lf
+*.pyx text eol=lf
+*.pxd text eol=lf
+*.pxi text eol=lf
+
+# Scripts
+*.sh text eol=lf
+*.bash text eol=lf
+*.fish text eol=lf
+
+# Documentation
+*.md text eol=lf
+*.rst text eol=lf
+*.txt text eol=lf
+*.adoc text eol=lf
+
+# Configuration files
+*.yaml text eol=lf
+*.yml text eol=lf
+*.toml text eol=lf
+*.ini text eol=lf
+*.cfg text eol=lf
+*.conf text eol=lf
+*.json text eol=lf
+
+# Docker
+Dockerfile text eol=lf
+*.dockerfile text eol=lf
+docker-compose*.yml text eol=lf
+
+# Git
+.gitattributes text eol=lf
+.gitignore text eol=lf
+.gitmodules text eol=lf
+
+# CI/CD
+*.yml text eol=lf
+.travis.yml text eol=lf
+.gitlab-ci.yml text eol=lf
+
+# Web files
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.jsx text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+
+# Data files
+*.csv text eol=lf
+*.tsv text eol=lf
+*.sql text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+*.pdf binary
+
+# Model files
+*.pth binary
+*.pt binary
+*.h5 binary
+*.pkl binary
+*.pickle binary
+*.onnx binary
+*.pb binary
+
+# Data files
+*.npy binary
+*.npz binary
+*.mat binary
+*.hdf5 binary
+
+# Archives
+*.zip binary
+*.tar binary
+*.gz binary
+*.bz2 binary
+*.7z binary
+*.rar binary
+
+# Jupyter notebooks - treat as text but with special handling
+*.ipynb text eol=lf linguist-documentation
+
+# Exclude from exports
+.gitattributes export-ignore
+.gitignore export-ignore
+.github/ export-ignore
+tests/ export-ignore
+docs/_build/ export-ignore
+*.pyc export-ignore
+__pycache__/ export-ignore
+.pytest_cache/ export-ignore
+.coverage export-ignore
+htmlcov/ export-ignore
+
+# Mark vendor files
+vendor/* linguist-vendored
+*.min.js linguist-vendored
+
+# Mark generated files
+docs/_build/* linguist-generated
+**/generated/** linguist-generated
+
+# Diff settings for specific files
+*.md diff=markdown
+*.ipynb diff=jupyternotebook
+*.pth diff=lfs
+*.pt diff=lfs
+
+# Merge strategies
+*.json merge=union
+CHANGELOG.md merge=union
